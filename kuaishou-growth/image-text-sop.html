@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图文带货 24 步实操手册 · 快手 0 粉起步</title>
+<style>
+:root{
+  --bg:#F6F1E8;
+  --bg2:#FFFCF5;
+  --ink:#241F1B;
+  --muted:#77695B;
+  --rule:#E1D5C1;
+  --accent:#C2410C;
+  --accent2:#2E5E4A;
+  --accent-soft:#F4E3D6;
+  --green-soft:#E4EDE7;
+  --font-sans:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --maxw:980px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-sans);font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+/* ---------- sticky progress ---------- */
+.progress{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,241,232,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.progress-inner{
+  max-width:var(--maxw);margin:0 auto;padding:10px 24px;
+  display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted);
+}
+.bar{flex:1;height:6px;background:var(--rule);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;width:0;background:var(--accent);transition:width .25s ease;border-radius:99px;}
+.progress-count{font-family:var(--font-mono);color:var(--ink);font-weight:600;min-width:56px;text-align:right;}
+.reset{
+  border:1px solid var(--rule);background:var(--bg2);color:var(--muted);
+  font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit;
+}
+.reset:hover{color:var(--accent);border-color:var(--accent);}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 44px;border-bottom:1px solid var(--rule);}
+.kicker{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin-bottom:18px;
+}
+h1{
+  font-size:clamp(30px,5vw,48px);line-height:1.2;margin:0 0 18px;
+  font-weight:800;letter-spacing:-.01em;
+}
+.lede{font-size:17px;color:var(--muted);max-width:660px;margin:0 0 28px;}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+.chip{
+  font-size:12px;padding:5px 12px;border-radius:99px;
+  background:var(--bg2);border:1px solid var(--rule);color:var(--muted);
+}
+.chip strong{color:var(--ink);font-weight:600;}
+.how{
+  background:var(--bg2);border:1px solid var(--rule);border-radius:12px;
+  padding:20px 24px;font-size:14px;color:var(--muted);
+}
+.how b{color:var(--ink);}
+.how p{margin:0 0 8px;}
+.how p:last-child{margin-bottom:0;}
+
+/* ---------- phase ---------- */
+.phase{padding:56px 0 8px;}
+.phase-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+.phase-no{
+  font-family:var(--font-mono);font-size:13px;font-weight:700;
+  color:var(--accent);letter-spacing:.1em;
+}
+.phase-head h2{font-size:clamp(20px,3vw,26px);margin:0;font-weight:750;}
+.phase-desc{color:var(--muted);font-size:14px;margin:0 0 28px;max-width:720px;}
+
+/* ---------- step card ---------- */
+.step{
+  background:var(--bg2);border:1px solid var(--rule);border-radius:12px;
+  padding:22px 24px;margin-bottom:14px;scroll-margin-top:76px;
+  transition:border-color .2s;
+}
+.step:hover{border-color:#D3C3A9;}
+.step.done{background:var(--green-soft);border-color:#C9DBD1;}
+.step-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.step-check{
+  appearance:none;-webkit-appearance:none;
+  width:22px;height:22px;flex:0 0 22px;border-radius:50%;
+  border:2px solid var(--rule);background:#fff;cursor:pointer;position:relative;
+  transition:all .15s;
+}
+.step-check:checked{background:var(--accent2);border-color:var(--accent2);}
+.step-check:checked::after{
+  content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(42deg);
+}
+.step-no{
+  font-family:var(--font-mono);font-size:12px;font-weight:700;
+  color:#fff;background:var(--ink);border-radius:5px;padding:2px 7px;letter-spacing:.05em;
+}
+.step.done .step-no{background:var(--accent2);}
+.step-head h3{font-size:16px;margin:0;font-weight:700;flex:1;line-height:1.45;}
+.step-body{font-size:14.5px;color:var(--muted);}
+.kv{display:grid;grid-template-columns:74px 1fr;gap:6px 14px;margin:0;}
+.kv dt{color:var(--accent2);font-weight:700;font-size:13px;padding-top:2px;}
+.kv dd{margin:0;}
+.kv dd ul{margin:0;padding-left:18px;}
+.kv dd li{margin-bottom:4px;}
+.kv dd li:last-child{margin-bottom:0;}
+.done-tag{
+  display:inline-block;font-size:12px;color:var(--accent2);font-weight:700;
+  margin-right:6px;
+}
+
+/* ---------- table ---------- */
+.tbl-wrap{overflow-x:auto;margin:18px 0;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top;}
+th{font-size:12px;letter-spacing:.04em;color:var(--muted);font-weight:700;background:var(--accent-soft);}
+td strong{color:var(--ink);}
+tbody tr:last-child td{border-bottom:0;}
+.num{font-family:var(--font-mono);text-align:center;}
+
+/* ---------- callout ---------- */
+.note{
+  border-left:3px solid var(--accent2);background:var(--green-soft);
+  border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;margin:20px 0;color:var(--ink);
+}
+.note b{color:var(--accent2);}
+.warn{
+  border-left:3px solid var(--accent);background:var(--accent-soft);
+  border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;margin:20px 0;
+}
+.warn b{color:var(--accent);}
+
+/* ---------- copy block ---------- */
+.copy{
+  background:#fff;border:1px dashed var(--rule);border-radius:10px;
+  padding:16px 18px;margin:14px 0;font-size:14px;color:var(--ink);
+}
+.copy .label{font-size:11px;letter-spacing:.1em;color:var(--accent);font-weight:700;display:block;margin-bottom:6px;}
+.copy p{margin:0 0 6px;}
+.copy p:last-child{margin-bottom:0;}
+
+/* ---------- checklist ---------- */
+.check-list{list-style:none;margin:14px 0;padding:0;}
+.check-list li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--rule);font-size:14px;}
+.check-list li:last-child{border-bottom:0;}
+.shot-check{
+  appearance:none;-webkit-appearance:none;width:18px;height:18px;flex:0 0 18px;
+  border:1.5px solid var(--rule);border-radius:4px;background:#fff;cursor:pointer;
+  margin-top:4px;position:relative;
+}
+.shot-check:checked{background:var(--accent);border-color:var(--accent);}
+.shot-check:checked::after{
+  content:"";position:absolute;left:5px;top:1px;width:4px;height:9px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(42deg);
+}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:64px;padding:40px 0 64px;border-top:1px solid var(--rule);
+  font-size:12.5px;color:var(--muted);
+}
+footer p{margin:0 0 8px;}
+
+@media (max-width:640px){
+  .wrap{padding:0 18px;}
+  .progress-inner{padding:9px 18px;gap:9px;font-size:12px;}
+  .hero{padding:48px 0 34px;}
+  .step{padding:18px 18px;}
+  .kv{grid-template-columns:1fr;gap:2px;}
+  .kv dt{padding-top:8px;}
+  .phase{padding:40px 0 4px;}
+}
+@media print{
+  .progress,.reset{display:none;}
+  body{background:#fff;font-size:12px;}
+  .step{break-inside:avoid;background:#fff;}
+  .phase{break-before:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress">
+  <div class="progress-inner">
+    <span>完成进度</span>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <span class="progress-count" id="progressCount">0 / 24</span>
+    <button class="reset" id="resetBtn">重置</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Kuaishou · 0 粉起步 · 不出镜</div>
+    <h1>图文带货 24 步实操手册</h1>
+    <p class="lede">从开通权限到第一单成交，一步一步照着做。不需要出镜、不需要口才、不需要囤货，一部手机加一个窗边角落就能开始。</p>
+    <div class="meta-row">
+      <span class="chip">适用：<strong>快手图文带货</strong></span>
+      <span class="chip">起步门槛：<strong>0 粉快分销</strong></span>
+      <span class="chip">每天投入：<strong>1.5 小时</strong></span>
+      <span class="chip">首单目标：<strong>第 7 天</strong></span>
+    </div>
+    <div class="how">
+      <p><b>怎么用：</b>按阶段顺序做，不要跳步。每完成一步就点左侧圆圈，进度会自动保存在本机浏览器。</p>
+      <p><b>为什么是 24 步：</b>每步只改一个变量，出问题时你能立刻知道是哪一步错了。</p>
+      <p><b>打印：</b>Ctrl/Cmd + P 可直接打印成纸质清单，勾选框会原样输出。</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<!-- ================= 阶段 0 ================= -->
+<section class="phase" id="p0">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 0</span>
+    <h2>开始前的三个准备</h2>
+  </div>
+  <p class="phase-desc">这一阶段不发布任何内容，只把“能持续拍下去”的条件搭好。准备不到位，后面每条都会卡在同一个地方。</p>
+
+  <article class="step" id="s1">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="1" aria-label="第 1 步完成">
+      <span class="step-no">01</span>
+      <h3>搭一个 1 平方米的拍摄角</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>让每条图文的画质、光线、背景保持一致，形成账号视觉记忆。</dd>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>靠窗的桌子，白天 10:00–15:00 的自然光最好，侧光或逆光，不要正对阳光。</li>
+        <li>背景只用两样东西：白墙 / 一块 60×90cm 的白色或木纹背景纸。</li>
+        <li>手机后置摄像头，拍摄前用衣角擦一下镜头（90% 的糊片都是镜头油）。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>随手拍一张，画面干净、主体清晰、没有大面积反光和硬阴影。</dd>
+      <dt>用时</dt>
+      <dd>30 分钟，一次搭好长期复用。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s2">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="2" aria-label="第 2 步完成">
+      <span class="step-no">02</span>
+      <h3>建一张选品记录表</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>把“凭感觉选品”变成可比较的数字，避免拍完才发现佣金只有 3%。</dt>
+      <dt>怎么做</dt>
+      <dd>手机备忘录或表格，建 8 列：品名 / 类目 / 到手价 / 佣金率 / 预估退货率 / 痛点一句话 / 视觉亮点 / 同类销量。</dd>
+      <dt>完成标准</dt>
+      <dd>表格建好，并且已经填进第 1 个候选品。</dd>
+      <dt>用时</dt>
+      <dd>10 分钟。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s3">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="3" aria-label="第 3 步完成">
+      <span class="step-no">03</span>
+      <h3>只选一个测试类目</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>前 14 天只做一个类目，让系统认清你的账号标签，也让你的拍摄越来越快。</dd>
+      <dt>怎么做</dt>
+      <dd>四选一：<b>零食特产</b> / <b>家居收纳清洁</b> / <b>厨房小工具</b> / <b>应季保暖</b>。选你身边最容易拿到实物、最容易拍的那一个。</dd>
+      <dt>完成标准</dt>
+      <dd>写下一句话：<b>“我这个账号前 14 天只卖 ______。”</b></dd>
+      <dt>用时</dt>
+      <dd>5 分钟。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 1 ================= -->
+<section class="phase" id="p1">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 1</span>
+    <h2>把权限开通，把发布流程走通</h2>
+  </div>
+  <p class="phase-desc">很多人卡在“发了没挂车”，其实是权限没开或入口没找对。这一阶段的目标是：能独立发出一条带商品的图文。</p>
+
+  <article class="step" id="s4">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="4" aria-label="第 4 步完成">
+      <span class="step-no">04</span>
+      <h3>把账号资料做“像个真人”</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>图文带货最怕被当成营销号，资料完整度直接决定初始流量。</dd>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>实名认证 + 绑定手机号，缺一项都可能影响带货权限。</li>
+        <li>头像用真实生活场景照（手、桌子、产品、宠物都行），不要明星、不要 logo、不要网图。</li>
+        <li>昵称公式：<b>地域 + 品类 + 人设</b>，例如“临沂小厨娘”“县城收纳姐”。</li>
+        <li>简介写清两件事：我每天分享什么 + 同款在橱窗。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>资料完整度 100%，主页看起来像一个真实在生活的人。</dd>
+      <dt>用时</dt>
+      <dd>20 分钟。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s5">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="5" aria-label="第 5 步完成">
+      <span class="step-no">05</span>
+      <h3>申请带货权限：先开快分销</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>0 粉也能开始带货，不用营业执照、不用囤货。</dd>
+      <dt>怎么做</dt>
+      <dd>快手 App → 我 → 创作者中心 → 带货中心 → 申请开通。签协议，普通类目新达人通常是 0 元保证金。美妆、食品、珠宝等类目门槛更高，先避开。</dd>
+      <dt>完成标准</dt>
+      <dd>后台显示“带货权限已开通”，选品广场能正常进入。</dd>
+      <dt>注意</dt>
+      <dd>类目和保证金规则会调整，以你后台实际页面为准，不要照着旧攻略硬套。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s6">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="6" aria-label="第 6 步完成">
+      <span class="step-no">06</span>
+      <h3>先发一条不挂商品的图文，把流程走一遍</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>熟悉选图、选封面、加话题、加定位，避免第一次带货时手忙脚乱。</dt>
+      <dt>怎么做</dt>
+      <dd>点“+” → 图文 → 选 6 张自己的生活照 → 选封面 → 加 3 个话题 → 开同城定位 → 发布。</dd>
+      <dt>完成标准</dt>
+      <dd>发布成功，并且你知道三件事：封面怎么换、话题在哪加、定位在哪开。</dd>
+      <dt>用时</dt>
+      <dd>20 分钟。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 2 ================= -->
+<section class="phase" id="p2">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 2</span>
+    <h2>选品：先筛掉 80%，再打分</h2>
+  </div>
+  <p class="phase-desc">图文带货 70% 的结果在选品时就决定了。拍摄和文案只能放大一个好品，救不了一个错品。</p>
+
+  <article class="step" id="s7">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="7" aria-label="第 7 步完成">
+      <span class="step-no">07</span>
+      <h3>用 5 条硬标准筛出 10 个候选</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>从选品广场几百个品里，快速砍到 10 个。</dd>
+      <dt>怎么做</dt>
+      <dd>进选品广场 / 快分销热榜，逐个对照下面 5 条，<b>任何一条不满足就直接划掉</b>。</dd>
+    </dl>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>标准</th><th>合格线</th><th>为什么</th></tr></thead>
+        <tbody>
+          <tr><td><strong>客单价</strong></td><td>9.9–49 元</td><td>低于 9.9 佣金不够，高于 49 决策变重</td></tr>
+          <tr><td><strong>视觉强度</strong></td><td>1 秒能看懂是什么</td><td>图文靠封面点击，看不懂就没流量</td></tr>
+          <tr><td><strong>痛点明确</strong></td><td>能说出一个具体难受的场景</td><td>没有痛点就没有购买理由</td></tr>
+          <tr><td><strong>佣金空间</strong></td><td>≥ 20%</td><td>低于 20% 不值得投入拍摄时间</td></tr>
+          <tr><td><strong>退货风险</strong></td><td>非尺码、非功效类</td><td>退货吃掉佣金，还拉低账号分</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="kv">
+      <dt>完成标准</dt>
+      <dd>选品记录表里正好 10 行，不多不少。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s8">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="8" aria-label="第 8 步完成">
+      <span class="step-no">08</span>
+      <h3>给 10 个品打分，只留 5 个</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>把主观偏好换成分数，避免“我觉得好”导致全军覆没。</dt>
+      <dt>怎么做</dt>
+      <dd>5 项各 4 分，满分 20。<b>14 分以上进测试池</b>，其余全部放弃，不要舍不得。</dd>
+    </dl>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>维度</th><th>4 分</th><th>2 分</th><th>0 分</th></tr></thead>
+        <tbody>
+          <tr><td>视觉冲击</td><td>一眼惊艳/有强对比</td><td>能看懂但普通</td><td>看不出是什么</td></tr>
+          <tr><td>痛点强度</td><td>人人都遇到过</td><td>特定人群才有</td><td>说不上痛点</td></tr>
+          <tr><td>价格优势</td><td>明显低于超市/电商</td><td>差不多</td><td>更贵</td></tr>
+          <tr><td>佣金空间</td><td>≥ 30%</td><td>20–30%</td><td>低于 20%</td></tr>
+          <tr><td>退货安全</td><td>几乎不退货</td><td>偶有退货</td><td>尺码/功效类高退</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="kv">
+      <dt>完成标准</dt>
+      <dd>留下 5 个品，每个品都有一句 15 字以内的痛点描述。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s9">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="9" aria-label="第 9 步完成">
+      <span class="step-no">09</span>
+      <h3>拿到实物，确认能拍</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>没有实物就只能用官方素材，转化会明显变差。</dt>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>自己下单买 1 件样品，总预算控制在 100 元以内。</li>
+        <li>到货先拆、先用、先拍，把真实使用感受记在选品表里。</li>
+        <li>同时核对后台：库存、发货时效、发货地、佣金比例是否和页面一致。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>5 个品里有 3 个以上拿到了实物，并且各自能凑出 6 张可用图。</dd>
+      <dt>用时</dt>
+      <dd>2–4 天（等快递）。</dd>
+    </dl>
+    <div class="note"><b>没有货源也能做：</b>先做快分销带别人的货，卖爆一个品之后再考虑自己找源头。不要一开始就囤货。</div>
+  </article>
+</section>
+
+<!-- ================= 阶段 3 ================= -->
+<section class="phase" id="p3">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 3</span>
+    <h2>拍图：6 张图各干一件事</h2>
+  </div>
+  <p class="phase-desc">不要拍 9 张差不多的商品图，那等于零信息。每张图承担一个说服任务，用户划到第 6 张就应该想下单。</p>
+
+  <article class="step" id="s10">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="10" aria-label="第 10 步完成">
+      <span class="step-no">10</span>
+      <h3>固定拍摄参数</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>让所有作品风格统一，账号看起来是“一个人做的”，而不是拼凑的。</dt>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>画幅统一 3:4（竖图，发现页双列显示最完整）。</li>
+        <li>关闭美颜、关闭 HDR 自动切换，长按屏幕锁定曝光。</li>
+        <li>每张图上方留出约 1/5 空白，专门放文字，避免被裁掉。</li>
+        <li>同一组图只用一种背景、一种色调，不换场景。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>随手拍 3 张，色调、光线、背景一致。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s11">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="11" aria-label="第 11 步完成">
+      <span class="step-no">11</span>
+      <h3>按分工拍完 6 张</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>用 6 张图完成一次完整说服：引起注意 → 说中痛点 → 建立信任 → 给出理由 → 促成下单。</dt>
+    </dl>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>序号</th><th>这张图的任务</th><th>具体拍什么</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td><strong>封面</strong>（决定 80% 流量）</td><td>痛点大字 + 产品 + 使用结果，三者同框</td></tr>
+          <tr><td class="num">2</td><td>痛点场景</td><td>乱的衣柜、脏的灶台、空冰箱、堆满的抽屉</td></tr>
+          <tr><td class="num">3</td><td>产品全貌</td><td>平铺 + 手或日常物品做尺寸参照</td></tr>
+          <tr><td class="num">4</td><td>使用过程</td><td>手部第一视角连拍，能看出动作</td></tr>
+          <tr><td class="num">5</td><td>前后对比</td><td>同一角度拍“用前 / 用后”</td></tr>
+          <tr><td class="num">6</td><td>价格锚点</td><td>超市小票 / 电商页面 + 到手价大字</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="kv">
+      <dt>完成标准</dt>
+      <dd>6 张图顺序正确，第 1 张在手机缩略图大小下仍能看清大字。</dd>
+      <dt>用时</dt>
+      <dd>单个品 40 分钟，熟练后 20 分钟。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s12">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="12" aria-label="第 12 步完成">
+      <span class="step-no">12</span>
+      <h3>加字排版，只做三件事</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>图能自己说话，用户不用点开看文案。</dd>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>用醒图 / 黄油相机，只加“痛点句 + 价格 + 箭头”。</li>
+        <li>字号 ≥ 画面宽度的 1/12，每张不超过 3 行字。</li>
+        <li>全组统一字体、统一描边（白字黑边最稳），不换花字。</li>
+        <li>调亮度 +8、对比 +10，不要用滤镜改色调。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>把手机拿远 40cm，还能一眼读完封面上的字。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 4 ================= -->
+<section class="phase" id="p4">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 4</span>
+    <h2>文案：标题决定点击，正文决定下单</h2>
+  </div>
+  <p class="phase-desc">图负责“停下来”，文案负责“买下来”。两者不要重复说同一句话。</p>
+
+  <article class="step" id="s13">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="13" aria-label="第 13 步完成">
+      <span class="step-no">13</span>
+      <h3>套标题公式，写 3 条备选</h3>
+    </div>
+    <dl class="kv">
+      <dt>公式</dt>
+      <dd><b>人群 + 场景 + 痛点 + 结果 + 价格</b></dd>
+      <dt>怎么做</dt>
+      <dd>同一个品写 3 条，换人群、换场景、换结果，发布时选最顺的一条，其余留作下次改封面用。</dd>
+    </dl>
+    <div class="copy">
+      <span class="label">范例 A · 零食</span>
+      <p>追剧别再买 39 的零食桶了，19.9 到手 30 包，一周没吃完</p>
+    </div>
+    <div class="copy">
+      <span class="label">范例 B · 收纳</span>
+      <p>租房党别买贵收纳了，9 块 9 一个抽屉盒，衣柜空出一半</p>
+    </div>
+    <div class="copy">
+      <span class="label">范例 C · 厨房</span>
+      <p>做饭慢不是手艺差，是刀不对，19.9 的切菜器 3 秒一根</p>
+    </div>
+    <div class="warn">
+      <b>这 5 种标题不要写：</b>“好物推荐｜超值零食”（没人群没痛点）、“这个收纳盒太好用了”（没场景）、“9.9 包邮”（只有价格）、“家人们冲”（没具体利益）、“全网最低价”（绝对化用语，违规）。
+    </div>
+    <dl class="kv">
+      <dt>完成标准</dt>
+      <dd>3 条标题都在 20 字以内，且每条都能看出卖给谁、多少钱。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s14">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="14" aria-label="第 14 步完成">
+      <span class="step-no">14</span>
+      <h3>正文写 5 行，每行一个任务</h3>
+    </div>
+    <dl class="kv">
+      <dt>结构</dt>
+      <dd>钩子 → 痛点 → 产品 + 证据 → 价格 → 引导。超过 5 行就删，没人看完。</dd>
+    </dl>
+    <div class="copy">
+      <span class="label">填空模板</span>
+      <p>第 1 行：我以前【场景】，每次都【难受的细节】。</p>
+      <p>第 2 行：后来换成【产品】，【一个具体变化】。</p>
+      <p>第 3 行：【材质/尺寸/数量/用了几天】，这些图里都能看到。</p>
+      <p>第 4 行：【原价】对比，到手【价格】。</p>
+      <p>第 5 行：左下角小黄车，同款在这个链接。</p>
+    </div>
+    <div class="copy">
+      <span class="label">成品示例 · 零食</span>
+      <p>我家追剧以前一晚上能干掉两桶薯片，月底看账单吓一跳。</p>
+      <p>后来换成这种小包分装，一次拆一包，不会一口气吃光。</p>
+      <p>30 包到手 19.9，独立包装，办公室抽屉里塞一把。</p>
+      <p>原味 + 海苔 + 芝士三种混装，不掉渣。</p>
+      <p>左下角小黄车，同款链接，拍两箱更划算。</p>
+    </div>
+    <dl class="kv">
+      <dt>完成标准</dt>
+      <dd>正文 5 行以内，出现至少 1 个具体数字，且价格写清楚。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s15">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="15" aria-label="第 15 步完成">
+      <span class="step-no">15</span>
+      <h3>定话题 + 开同城</h3>
+    </div>
+    <dl class="kv">
+      <dt>目标</dt>
+      <dd>同城流量池竞争最小，是 0 粉起号最快的入口。</dd>
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>3–5 个话题：1 个品类词（#收纳盒）+ 1 个场景词（#租房神器）+ #图文带货 + #同城。</li>
+        <li>定位开到所在区县，不要选全市或全省。</li>
+        <li>不要在文案里出现微信号、二维码、“私聊”——违规。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>话题与品类相关，定位精确到区县。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 5 ================= -->
+<section class="phase" id="p5">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 5</span>
+    <h2>发布：把商品挂上去，把第一波互动做掉</h2>
+  </div>
+  <p class="phase-desc">发布不是点一下“发送”就完了。发布后 10 分钟的动作，直接决定这条能不能进入下一个流量池。</p>
+
+  <article class="step" id="s16">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="16" aria-label="第 16 步完成">
+      <span class="step-no">16</span>
+      <h3>挂车：1–3 个商品，不要贪多</h3>
+    </div>
+    <dl class="kv">
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>发布页 → 添加商品 → 选 1 个主推 + 最多 2 个关联（同类不同规格）。</li>
+        <li>核对佣金、库存、发货地、发货时效，全部确认再发。</li>
+        <li>商品顺序把主推放第一位，用户默认点第一个。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>作品发出去后，左下角能看到小黄车，点开商品价格与图文一致。</dd>
+      <dt>注意</dt>
+      <dd>图文挂车的具体门槛与类目限制以后台为准，权限不足时先做内容、攒到 1000 粉再挂。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s17">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="17" aria-label="第 17 步完成">
+      <span class="step-no">17</span>
+      <h3>挑时间、选封面、配音乐</h3>
+    </div>
+    <dl class="kv">
+      <dt>发布时间</dt>
+      <dd>11:30–13:00 / 17:30–19:00 / 21:00–22:30，三个时段各测 3 条，留下数据最好的一个。</dd>
+      <dt>封面</dt>
+      <dd>必须手动选第 1 张，不要让系统自动截取。</dd>
+      <dt>音乐</dt>
+      <dd>用热门 BGM，音量压到 20% 左右，不能盖过画面信息。纯音乐优先，人声歌容易分散注意。</dt>
+      <dt>完成标准</dt>
+      <dd>封面是自己选的那张，且缩略图状态下面部/产品没有被裁掉。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s18">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="18" aria-label="第 18 步完成">
+      <span class="step-no">18</span>
+      <h3>发布后 10 分钟，做三件事</h3>
+    </div>
+    <dl class="kv">
+      <dt>三件事</dt>
+      <dd><ul>
+        <li><b>自己置顶一条评论：</b>“到手 XX 元，左下角小黄车，有 XX 规格”。</li>
+        <li><b>设置私信自动回复：</b>“链接在作品左下角，点小黄车就能拍”。</li>
+        <li><b>转发到粉丝群 / 朋友圈：</b>前 20 个互动能把作品推进下一层流量池。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>评论区有置顶，私信有自动回复，作品有站外第一波点击。</dd>
+      <dt>用时</dt>
+      <dd>10 分钟，每条都做。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 6 ================= -->
+<section class="phase" id="p6">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 6</span>
+    <h2>看数据：一次只改一个变量</h2>
+  </div>
+  <p class="phase-desc">图文带货的复盘不需要复杂报表，4 个数字就能定位问题出在哪一层。</p>
+
+  <article class="step" id="s19">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="19" aria-label="第 19 步完成">
+      <span class="step-no">19</span>
+      <h3>每条只记 4 个数字</h3>
+    </div>
+    <dl class="kv">
+      <dt>记什么</dt>
+      <dd>曝光量 / 封面点击率（播放÷曝光）/ 商品点击率 / 成交单数。填在附录 C 的表里。</dd>
+      <dt>什么时候记</dt>
+      <dd>发布后 24 小时记一次即可，不要每小时刷。</dd>
+      <dt>完成标准</dt>
+      <dd>每条作品都有一行数据，能横向比较。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s20">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="20" aria-label="第 20 步完成">
+      <span class="step-no">20</span>
+      <h3>用决策树改，不要瞎改</h3>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>看到的现象</th><th>问题在哪</th><th>只改这一个</th></tr></thead>
+        <tbody>
+          <tr><td>曝光 &lt; 500</td><td>没进流量池</td><td>换封面首图 + 加同城定位 + 换 2 个话题</td></tr>
+          <tr><td>曝光正常，点击率 &lt; 3%</td><td>封面不行</td><td>只换封面，标题和正文不动，重发</td></tr>
+          <tr><td>有点击，商品点击 &lt; 10%</td><td>图没说服力</td><td>把价格锚点挪到第 1 或第 2 张</td></tr>
+          <tr><td>有商品点击，不成交</td><td>品或价格不行</td><td>换品，或加“拍两件更划算”</td></tr>
+          <tr><td>有成交但量小</td><td>内容成立</td><td>复制这套封面结构，再拍 3 条同品</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="kv">
+      <dt>铁律</dt>
+      <dd>一条作品只改一个变量。同时改封面又改标题，你永远不知道是哪个起了作用。</dd>
+      <dt>完成标准</dt>
+      <dd>每次复盘能说出一句“这次我只改了什么”。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s21">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="21" aria-label="第 21 步完成">
+      <span class="step-no">21</span>
+      <h3>每晚 5 分钟复盘</h3>
+    </div>
+    <dl class="kv">
+      <dt>三个问题</dt>
+      <dd><ul>
+        <li>今天哪一条数据最好？为什么？（封面/品/时间，选一个）</li>
+        <li>哪一条最差？砍掉它对应的做法。</li>
+        <li>明天只改哪一个变量？</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>在附录 C 写下明天的一个动作，第二天照着执行。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 阶段 7 ================= -->
+<section class="phase" id="p7">
+  <div class="phase-head">
+    <span class="phase-no">PHASE 7</span>
+    <h2>放大：从一条爆款到一个稳定生意</h2>
+  </div>
+  <p class="phase-desc">图文只是入口。真正赚钱的部分在直播承接和私域复购，这两件事快手比别的平台更容易做。</p>
+
+  <article class="step" id="s22">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="22" aria-label="第 22 步完成">
+      <span class="step-no">22</span>
+      <h3>出单当晚，开一场手播承接</h3>
+    </div>
+    <dl class="kv">
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>30–60 分钟，只讲图文里那一个品，不出镜就拍手部操作。</li>
+        <li>每 5 分钟重复一次：“左下角小黄车，今天拍的发顺丰”。</li>
+        <li>直播标题带同样的关键词，方便图文用户搜到。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>图文有成交的 24 小时内，至少开过一场同品直播。</dd>
+      <dt>不要做</dt>
+      <dd>无人直播、循环录播、AI 数字人主号——限流甚至封号。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s23">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="23" aria-label="第 23 步完成">
+      <span class="step-no">23</span>
+      <h3>把成交用户拉进群</h3>
+    </div>
+    <dl class="kv">
+      <dt>怎么做</dt>
+      <dd><ul>
+        <li>成交后私信一句：“拉你进老铁群，下次上新先给你留”。</li>
+        <li>群内固定三件事：上新预告、使用小技巧、复购券。</li>
+        <li>不要天天发广告，一周 2 次足够。</li>
+      </ul></dd>
+      <dt>完成标准</dt>
+      <dd>第一周至少 20 个成交用户进群，群内有 1 次真实互动。</dd>
+    </dl>
+  </article>
+
+  <article class="step" id="s24">
+    <div class="step-head">
+      <input type="checkbox" class="step-check" data-step="24" aria-label="第 24 步完成">
+      <span class="step-no">24</span>
+      <h3>小额定投，只投已经出单的作品</h3>
+    </div>
+    <dl class="kv">
+      <dt>怎么做</dt>
+      <dd>选 1 条自然出单的作品，投“作品推广”50–100 元，跑 3 天。ROI 大于 1.5 再加预算，小于 1 立刻停。</dd>
+      <dt>铁律</dt>
+      <dd>永远不要用投流去救一条自然流量都不行的作品。投流只放大已经跑通的。</dd>
+      <dt>完成标准</dt>
+      <dd>至少完成 1 次小额测试，并记录投入与产出。</dd>
+    </dl>
+  </article>
+</section>
+
+<!-- ================= 14 天 ================= -->
+<section class="phase" id="cal">
+  <div class="phase-head">
+    <span class="phase-no">SCHEDULE</span>
+    <h2>14 天执行日历</h2>
+  </div>
+  <p class="phase-desc">每天 1.5 小时。前 4 天打基础，第 5 天开始出内容，第 7 天冲刺首单，第 8 天起放大。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>天</th><th>做什么</th><th>对应步骤</th><th>产出</th></tr></thead>
+      <tbody>
+        <tr><td class="num">D1</td><td>搭拍摄角、建选品表、定类目、开权限</td><td>01–06</td><td>能发带车图文</td></tr>
+        <tr><td class="num">D2</td><td>筛 10 个品、打分留 5 个、下单样品</td><td>07–09</td><td>5 个测试品</td></tr>
+        <tr><td class="num">D3</td><td>拍 2 个品的 6 张图、加字排版</td><td>10–12</td><td>2 组可用图</td></tr>
+        <tr><td class="num">D4</td><td>写标题正文、挂车、发 2 条</td><td>13–18</td><td>首批 2 条带车图文</td></tr>
+        <tr><td class="num">D5</td><td>再发 2 条、记录 4 个指标</td><td>18–19</td><td>4 条数据</td></tr>
+        <tr><td class="num">D6</td><td>按决策树改封面，重发 2 条</td><td>20</td><td>优化后作品</td></tr>
+        <tr><td class="num">D7</td><td>周复盘，砍掉 2 个最差品，冲刺首单</td><td>21</td><td><strong>首单目标</strong></td></tr>
+        <tr><td class="num">D8–10</td><td>剩 3 个品各出 2 条，测 3 个发布时间</td><td>13–18</td><td>6 条作品</td></tr>
+        <tr><td class="num">D11–12</td><td>出单品加投 50–100 元，当晚开手播</td><td>22、24</td><td>直播承接</td></tr>
+        <tr><td class="num">D13</td><td>拉群、发复购券、整理使用技巧</td><td>23</td><td>首个粉丝群</td></tr>
+        <tr><td class="num">D14</td><td>总结：留 1–2 个品，转日更</td><td>21</td><td>可复制的 SOP</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note"><b>每天只做一件事的判断：</b>如果你某天时间不够，优先做“拍 6 张图 + 发 1 条”，复盘和投流都可以往后放。内容量是唯一的硬指标。</div>
+</section>
+
+<!-- ================= 附录 ================= -->
+<section class="phase" id="appx">
+  <div class="phase-head">
+    <span class="phase-no">APPENDIX</span>
+    <h2>附录：拍摄清单、模板、复盘表</h2>
+  </div>
+
+  <h3 style="font-size:16px;margin:24px 0 6px;">A · 六图拍摄清单（每个品打印一张）</h3>
+  <ul class="check-list">
+    <li><input type="checkbox" class="shot-check" aria-label="封面"><span><b>封面</b>：痛点大字 + 产品 + 结果，缩略图能读清</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="痛点"><span><b>痛点场景</b>：乱的/脏的/不够用的真实环境</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="全貌"><span><b>产品全貌</b>：平铺 + 手或常用物做尺寸参照</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="过程"><span><b>使用过程</b>：手部第一视角，动作看得出</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="对比"><span><b>前后对比</b>：同一角度的用前 / 用后</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="价格"><span><b>价格锚点</b>：原价来源 + 到手价大字</span></li>
+    <li><input type="checkbox" class="shot-check" aria-label="统一"><span><b>统一检查</b>：3:4、同一背景、同一字体、上方留白</span></li>
+  </ul>
+
+  <h3 style="font-size:16px;margin:32px 0 6px;">B · 正文填空模板</h3>
+  <div class="copy">
+    <p>我以前【场景】，每次都【难受的细节】。</p>
+    <p>后来换成【产品】，【一个具体变化】。</p>
+    <p>【材质 / 尺寸 / 数量 / 用了几天】，图里都能看到。</p>
+    <p>【原价】对比，到手【价格】。</p>
+    <p>左下角小黄车，同款在这个链接。</p>
+  </div>
+
+  <h3 style="font-size:16px;margin:32px 0 6px;">C · 每日复盘表（照抄到备忘录）</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>日期</th><th>作品/品</th><th>曝光</th><th>封面点击率</th><th>商品点击率</th><th>成交</th><th>明天改什么</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:16px;margin:32px 0 6px;">D · 八条违规红线</h3>
+  <div class="warn">
+    <p><b>1</b> 盗用他人商品图、搬运视频截图 —— 限流。</p>
+    <p><b>2</b> 食品、保健、美妆夸大功效（“治好”“根治”“减肥”）—— 下架扣分。</p>
+    <p><b>3</b> 图片或文案出现二维码、微信号、电话号码 —— 违规导流。</p>
+    <p><b>4</b> “全网最低”“第一”“国家级”等绝对化用语 —— 违规。</p>
+    <p><b>5</b> 一天连发十几条刷屏 —— 判定营销号。</p>
+    <p><b>6</b> 低价引流不发货、货不对板 —— 封橱窗。</p>
+    <p><b>7</b> 无人直播 / 循环录播 / AI 数字人当主号 —— 限流封号。</p>
+    <p><b>8</b> 用“最”字价格对比但无凭证 —— 涉嫌虚假宣传。</p>
+  </div>
+
+  <h3 style="font-size:16px;margin:32px 0 6px;">E · 一单到底赚多少（算清楚再投入）</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>项目</th><th>数值示例</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>到手价</td><td class="num">19.9 元</td><td>用户实际支付</td></tr>
+        <tr><td>佣金率</td><td class="num">20%</td><td>后台显示比例</td></tr>
+        <tr><td>单均佣金</td><td class="num">3.98 元</td><td>19.9 × 20%</td></tr>
+        <tr><td>退货率</td><td class="num">10%</td><td>按类目经验值</td></tr>
+        <tr><td>有效单均</td><td class="num">3.58 元</td><td>扣除退货后</td></tr>
+        <tr><td>样品成本</td><td class="num">19.9 元</td><td>一次性，卖 30 单即摊平</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note"><b>结论：</b>客单 20 元、佣金 20% 的品，大约 <b>6 单覆盖样品成本，30 单开始有感觉</b>。所以前 14 天不要只发 3 条就下结论，至少 15 条素材才有可比较的数据。</div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>本手册为个人实操整理，不含搬运、无人直播、AI 数字人方案。平台权限门槛、类目限制、保证金政策会随版本调整，开通前请以快手 App 后台实际页面为准。</p>
+    <p>配套阅读：<a href="./kuaishou-growth.html" style="color:var(--accent);">快手账号运营手册</a>（平台逻辑、人群、案例与 90 天计划）。</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input.step-check'));
+  var total = boxes.length;
+  var fill = document.getElementById('barFill');
+  var count = document.getElementById('progressCount');
+  var reset = document.getElementById('resetBtn');
+
+  function store(key, val) {
+    try { localStorage.setItem(key, val); } catch (e) {}
+  }
+  function read(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+
+  function update() {
+    var done = 0;
+    boxes.forEach(function (b) {
+      if (b.checked) done++;
+      var card = b.closest('.step');
+      if (card) card.classList.toggle('done', b.checked);
+    });
+    fill.style.width = (total ? (done / total * 100) : 0) + '%';
+    count.textContent = done + ' / ' + total;
+  }
+
+  boxes.forEach(function (b) {
+    var key = 'ks-sop-step-' + b.dataset.step;
+    if (read(key) === '1') b.checked = true;
+    b.addEventListener('change', function () {
+      store(key, b.checked ? '1' : '0');
+      update();
+    });
+  });
+
+  reset.addEventListener('click', function () {
+    boxes.forEach(function (b) {
+      b.checked = false;
+      store('ks-sop-step-' + b.dataset.step, '0');
+    });
+    update();
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
