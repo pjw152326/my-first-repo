@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家居收纳清洁 · 选品推荐表 · 快手图文带货</title>
+<style>
+:root{
+  --bg:#F6F1E8;--bg2:#FFFCF5;--ink:#241F1B;--muted:#77695B;--rule:#E1D5C1;
+  --accent:#C2410C;--accent2:#2E5E4A;--accent-soft:#F4E3D6;--green-soft:#E4EDE7;
+  --font-sans:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --maxw:1120px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:15.5px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+.hero{padding:64px 0 36px;border-bottom:1px solid var(--rule);}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px;}
+h1{font-size:clamp(26px,4.5vw,40px);line-height:1.2;margin:0 0 14px;font-weight:800;}
+.lede{color:var(--muted);max-width:760px;margin:0 0 20px;font-size:16px;}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;}
+.chip{font-size:12.5px;padding:5px 12px;border-radius:99px;background:var(--bg2);border:1px solid var(--rule);color:var(--muted);}
+.chip strong{color:var(--ink);}
+.warn-box{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:14px 18px;font-size:14px;}
+.warn-box b{color:var(--accent);}
+
+.phase{padding:48px 0 4px;}
+.phase-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+.phase-no{font-family:var(--font-mono);font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:.08em;}
+.phase-head h2{font-size:clamp(19px,3vw,24px);margin:0;font-weight:750;}
+.phase-desc{color:var(--muted);font-size:14px;margin:0 0 22px;max-width:780px;}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--bg2);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:900px;}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top;}
+th{font-size:11.5px;letter-spacing:.04em;color:var(--muted);font-weight:700;background:var(--accent-soft);position:sticky;top:0;}
+tbody tr:last-child td{border-bottom:0;}
+tbody tr:hover{background:#FFF7EE;}
+td.name{font-weight:700;color:var(--ink);white-space:nowrap;}
+.price,.comm{font-family:var(--font-mono);color:var(--accent);font-weight:600;white-space:nowrap;}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:600;white-space:nowrap;}
+.tag-hot{background:#FDE7E0;color:var(--accent);}
+.tag-mid{background:#F4E3D6;color:#B45309;}
+.tag-cool{background:var(--green-soft);color:var(--accent2);}
+.score{font-family:var(--font-mono);font-weight:700;text-align:center;}
+.score-hi{color:var(--accent2);}
+.score-mid{color:#B45309;}
+.score-lo{color:var(--muted);}
+.note-cell{color:var(--muted);font-size:12.5px;}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0;}
+.card{background:var(--bg2);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;}
+.card h3{margin:0 0 6px;font-size:16px;color:var(--accent);}
+.card .price{font-size:22px;margin:4px 0;}
+.card p{margin:8px 0;font-size:13.5px;color:var(--muted);line-height:1.6;}
+.card ul{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--ink);}
+.card ul li{margin-bottom:4px;}
+
+.score-sheet{background:var(--bg2);border:1px solid var(--rule);border-radius:10px;padding:20px;margin:18px 0;}
+.score-sheet table{min-width:auto;}
+.score-sheet th,.score-sheet td{font-size:13px;}
+.score-sheet input[type="text"]{
+  width:100%;border:1px solid var(--rule);background:#fff;border-radius:6px;
+  padding:6px 10px;font-family:inherit;font-size:13.5px;color:var(--ink);
+}
+.score-sheet input.num{width:60px;text-align:center;}
+.total{font-family:var(--font-mono);font-weight:700;font-size:20px;color:var(--accent);}
+footer{margin-top:56px;padding:36px 0 56px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);}
+footer p{margin:0 0 8px;}
+a{color:var(--accent);}
+
+@media (max-width:780px){
+  .trio{grid-template-columns:1fr;}
+  .wrap{padding:0 16px;}
+}
+@media print{
+  body{background:#fff;font-size:11px;}
+  .tbl-wrap{border:none;}
+  .warn-box{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Kuaishou · 家居收纳清洁 · 选品</div>
+    <h1>家居收纳清洁 · 选品推荐表</h1>
+    <p class="lede">12 个已筛过的候选品，已按 5 维打分（满分 20，14 分以上进测试池）。客单价和佣金是该类目在快分销的<strong>常见范围</strong>，以你选品广场后台实际显示为准。</p>
+    <div class="chips">
+      <span class="chip">类目：<strong>家居收纳清洁</strong></span>
+      <span class="chip">客单带：<strong>9.9 – 39.9 元</strong></span>
+      <span class="chip">佣金带：<strong>20% – 40%</strong></span>
+      <span class="chip">门槛：<strong>0 粉可做快分销</strong></span>
+    </div>
+    <div class="warn-box">
+      <b>使用说明：</b>佣金率、库存、发货地、售后政策请务必在“快手选品广场 / 快分销”打开具体商品页核对。下方评分是<strong>建议得分</strong>，你拿到实物后可在第二张打分表里重算。
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="phase">
+  <div class="phase-head">
+    <span class="phase-no">PART 1</span>
+    <h2>12 个推荐候选品</h2>
+  </div>
+  <p class="phase-desc">按建议得分排序。优先从得分 ≥ 16 的品里挑 3–5 个起手。流量热度 = 该品在快手发现页的出现频率和评论量。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>品项</th>
+          <th>客单价</th>
+          <th>佣金区间</th>
+          <th>流量热度</th>
+          <th>痛点</th>
+          <th>视觉亮点</th>
+          <th>建议<br>得分</th>
+          <th>拍法提示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="name">鱼鳞抹布 / 魔力抹布</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">25% – 40%</td>
+          <td><span class="tag tag-hot">● 高热</span></td>
+          <td>擦玻璃/镜子全是水渍毛絮，换布就亮</td>
+          <td>前后对比极强，玻璃一擦透亮</td>
+          <td class="score score-hi">19</td>
+          <td class="note-cell">第 1 张水印玻璃，第 5 张擦亮后对比</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="name">马桶清洁泡腾片</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">25% – 35%</td>
+          <td><span class="tag tag-hot">● 高热</span></td>
+          <td>马桶黄垢刷不掉，扔一颗泡一晚</td>
+          <td>投入→起泡→黄垢溶掉的过程</td>
+          <td class="score score-hi">18</td>
+          <td class="note-cell">拍冲水后的干净内壁，配原价比</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="name">抽屉式内衣收纳盒</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">20% – 35%</td>
+          <td><span class="tag tag-hot">● 高热</span></td>
+          <td>内衣袜子全堆一起，翻半天找不到</td>
+          <td>空抽屉→一格一格塞进去</td>
+          <td class="score score-hi">18</td>
+          <td class="note-cell">用你自己的抽屉拍，最有说服力</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="name">洗衣机槽清洁泡腾片</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">25% – 35%</td>
+          <td><span class="tag tag-mid">◐ 中热</span></td>
+          <td>洗衣机用几年里面全是泥垢</td>
+          <td>洗完排出黑水，冲击感强</td>
+          <td class="score score-hi">17</td>
+          <td class="note-cell">必须拍排水的黑水，转化最高</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="name">门后 / 衣柜收纳挂袋</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">25% – 40%</td>
+          <td><span class="tag tag-mid">◐ 中热</span></td>
+          <td>小房间没地方放东西，门后空着</td>
+          <td>空门→挂满一格一格杂物</td>
+          <td class="score score-hi">17</td>
+          <td class="note-cell">拍挂前后门的对比，强调不占地</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="name">管道疏通 / 毛发分解剂</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">25% – 40%</td>
+          <td><span class="tag tag-mid">◐ 中热</span></td>
+          <td>下水道堵了，头发菜叶沤臭</td>
+          <td>倒进去→冒泡→水通了</td>
+          <td class="score score-hi">17</td>
+          <td class="note-cell">别拍太恶心，拍疏通前后水流对比</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="name">真空压缩袋</td>
+          <td class="price">19.9 – 39.9</td>
+          <td class="comm">20% – 30%</td>
+          <td><span class="tag tag-mid">◐ 中热</span></td>
+          <td>棉被羽绒服占半个衣柜</td>
+          <td>鼓鼓一袋→抽真空压成薄片</td>
+          <td class="score score-mid">16</td>
+          <td class="note-cell">厚被子压成 1/5，对比要同角度</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="name">冰箱收纳盒 / 保鲜盒</td>
+          <td class="price">19.9 – 39.9</td>
+          <td class="comm">20% – 30%</td>
+          <td><span class="tag tag-mid">◐ 中热</span></td>
+          <td>冰箱乱成一锅粥，菜放两天就坏</td>
+          <td>乱冰箱→一格一盒整齐码放</td>
+          <td class="score score-mid">16</td>
+          <td class="note-cell">用你自家冰箱拍，真实感最强</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="name">厨房重油污净</td>
+          <td class="price">9.9 – 19.9</td>
+          <td class="comm">20% – 30%</td>
+          <td><span class="tag tag-hot">● 高热</span></td>
+          <td>灶台油烟机油垢粘手，钢丝球都难擦</td>
+          <td>喷上去→油污流下来→一擦干净</td>
+          <td class="score score-mid">16</td>
+          <td class="note-cell">拍油烟机滤网，前后对比冲击力大</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="name">可折叠收纳箱 / 储物箱</td>
+          <td class="price">19.9 – 39.9</td>
+          <td class="comm">20% – 30%</td>
+          <td><span class="tag tag-cool">○ 稳定</span></td>
+          <td>换季衣物没地方放，堆在床上</td>
+          <td>一堆乱衣服→叠好塞进箱子</td>
+          <td class="score score-mid">15</td>
+          <td class="note-cell">强调“可折叠不用时不占地”</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="name">透明抽屉鞋盒</td>
+          <td class="price">19.9 – 39.9</td>
+          <td class="comm">15% – 25%</td>
+          <td><span class="tag tag-cool">○ 稳定</span></td>
+          <td>鞋堆门口，找一双要翻半天</td>
+          <td>乱鞋堆→一格一盒码成墙</td>
+          <td class="score score-lo">14</td>
+          <td class="note-cell">至少买 4 个拍“鞋墙”才好看</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td class="name">旋转调料架</td>
+          <td class="price">19.9 – 39.9</td>
+          <td class="comm">20% – 30%</td>
+          <td><span class="tag tag-cool">○ 稳定</span></td>
+          <td>瓶瓶罐罐占满台面，拿一个碰倒仨</td>
+          <td>杂乱台面→旋转架一盘收纳</td>
+          <td class="score score-lo">14</td>
+          <td class="note-cell">适合你本身厨房调料多的人拍</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-box" style="margin-top:16px;">
+    <b>怎么挑第一批 5 个：</b>从得分 ≥ 16 的 9 个里选。<b>优先选你家里已经有、或能立刻拿到实物的</b>——没有实物就拍不出真实感，转化会掉一半。
+  </div>
+</section>
+
+<section class="phase">
+  <div class="phase-head">
+    <span class="phase-no">PART 2</span>
+    <h2>起手三件套（低风险组合）</h2>
+  </div>
+  <p class="phase-desc">三个品都是 9.9–19.9 客单、佣金高、视觉冲击强，且拍摄场景都能在你家完成。先做这三个，跑通整个流程再扩展。</p>
+
+  <div class="trio">
+    <div class="card">
+      <h3>鱼鳞抹布</h3>
+      <div class="price">9.9 – 19.9</div>
+      <p>流量最大、转化最高的清洁品。擦玻璃镜子的对比是“一眼惊艳”级。</p>
+      <ul>
+        <li>痛点：水渍毛絮擦不干净</li>
+        <li>场景：自家窗户 / 镜子 / 餐桌</li>
+        <li>关键帧：水印玻璃 → 一擦亮</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>抽屉式内衣收纳盒</h3>
+      <div class="price">9.9 – 19.9</div>
+      <p>收纳类目流量担当，几乎人人都有内衣袜子乱的问题，客单低决策快。</p>
+      <ul>
+        <li>痛点：内衣袜子堆一起找不到</li>
+        <li>场景：自家衣柜抽屉</li>
+        <li>关键帧：乱抽屉 → 一格一格</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>马桶清洁泡腾片</h3>
+      <div class="price">9.9 – 19.9</div>
+      <p>“扔一颗泡一晚”的懒人逻辑，复购率高，适合做引流品拉群。</p>
+      <ul>
+        <li>痛点：黄垢刷不掉、刷马桶累</li>
+        <li>场景：自家马桶</li>
+        <li>关键帧：投入起泡 → 冲水干净</li>
+      </ul>
+    </div>
+  </div>
+  <p class="phase-desc" style="margin-top:8px;">这三件套总成本不超过 60 元，拍 3 组图 = 9 条素材，足够跑一周的测试。</p>
+</section>
+
+<section class="phase">
+  <div class="phase-head">
+    <span class="phase-no">PART 3</span>
+    <h2>选品打分表（可填写 / 打印）</h2>
+  </div>
+  <p class="phase-desc">5 个维度各 4 分，满分 20。≥ 14 进测试池，&lt; 14 放弃。每个品填一张，按《图文带货 24 步实操手册》第 8 步执行。</p>
+
+  <div class="score-sheet">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:120px;">品项名称</th>
+          <th colspan="6"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" placeholder="例如：鱼鳞抹布"></td>
+          <td colspan="6"><input type="text" placeholder="一句话痛点：例如 擦玻璃全是水渍"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="margin-top:14px;">
+      <thead>
+        <tr>
+          <th style="width:90px;">维度</th>
+          <th>4 分</th>
+          <th>2 分</th>
+          <th>0 分</th>
+          <th style="width:70px;">得分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>视觉冲击</td><td>一眼惊艳/强对比</td><td>能看懂但普通</td><td>看不出是什么</td><td><input type="text" class="num" placeholder="0"></td></tr>
+        <tr><td>痛点强度</td><td>人人都遇到过</td><td>特定人群才有</td><td>说不上痛点</td><td><input type="text" class="num" placeholder="0"></td></tr>
+        <tr><td>价格优势</td><td>明显低于超市/电商</td><td>差不多</td><td>更贵</td><td><input type="text" class="num" placeholder="0"></td></tr>
+        <tr><td>佣金空间</td><td>≥ 30%</td><td>20–30%</td><td>&lt; 20%</td><td><input type="text" class="num" placeholder="0"></td></tr>
+        <tr><td>退货安全</td><td>几乎不退货</td><td>偶有退货</td><td>尺码/功效高退</td><td><input type="text" class="num" placeholder="0"></td></tr>
+        <tr><td colspan="4" style="text-align:right;font-weight:700;">合计（满分 20）</td><td><span class="total">__</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="phase">
+  <div class="phase-head">
+    <span class="phase-no">PART 4</span>
+    <h2>三个起手避坑</h2>
+  </div>
+  <div class="warn-box">
+    <p><b>1. 不要从佣金最高的品开始做。</b>高佣金往往意味着高退货、或品本身没流量。先选流量热 + 客单低的跑通流程。</p>
+    <p><b>2. 不要只看“已售”数字。</b>已售高但佣金低（&lt;15%）的品不值得拍，赚的钱不够你时间。</p>
+    <p><b>3. 清洁类避开功效宣传。</b>不要写“消毒杀菌 99%”“去顽固污渍 100%”，没有检测报告就是违规，写“油渍轻松擦”“玻璃擦完透亮”这类效果描述即可。</p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>本页客单价、佣金区间为家居收纳清洁类目在快手快分销的常见范围，仅供你在选品广场筛选时参考。最终佣金、库存、发货时效、售后政策以你账号后台实际显示为准。</p>
+    <p>配套文件：<a href="./image-text-sop.html">图文带货 24 步实操手册</a> · <a href="./选品记录表.csv">选品记录表（CSV）</a> · <a href="./kuaishou-growth.html">快手账号运营手册</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
